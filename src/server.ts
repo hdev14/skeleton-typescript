@@ -1,10 +1,11 @@
-import express from 'express';
+import express from 'express'
 
-const app = express();
+const app = express()
 
 app.get('/', (req, res) => {
-  return res.json({message: 'Skelleton node-ts'});
+  return res.json({ message: 'Skelleton node-ts' })
 })
+
 app.listen(4444, () => {
-  console.log('Server is running!');
-});
+  console.log('Server is running!')
+})
