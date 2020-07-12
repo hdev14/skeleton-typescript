@@ -1,10 +1,9 @@
 import express from 'express'
+import routes from './routes'
 
 const app = express()
 
-app.get('/', (req, res) => {
-  return res.json({ message: 'Skelleton node-ts' })
-})
+app.use(routes)
 
 app.listen(4444, () => {
   console.log('Server is running!')
