@@ -22,6 +22,7 @@ class AddressController {
     }
     const { street, neighborhood, address_number, city, state, complement } = req.body
     const address = new Address()
+    address.user_id = user_id
     address.street = street
     address.neighborhood = neighborhood
     address.address_number = address_number
