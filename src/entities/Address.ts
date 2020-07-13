@@ -37,3 +37,5 @@ class Address {
   @UpdateDateColumn()
   updated_at: Date
 }
+
+export default Address
