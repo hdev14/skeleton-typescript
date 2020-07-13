@@ -1,8 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BaseEntity
+} from 'typeorm'
 import User from './User'
 
 @Entity('addresses')
-class Address {
+class Address extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
