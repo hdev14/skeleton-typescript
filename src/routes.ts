@@ -1,18 +1,12 @@
 import { Router } from 'express'
 
-import User from './entities/User'
+import UserController from './controllers/UserController'
 
 const router = Router()
 
-router.get('/', async (req, res) => {
-  const user = new User()
-  user.name = 'user'
-  user.email = 'user@email.com'
-  user.password = '123456'
-  user.save()
-
-  const users = await User.find()
-  return res.json(users)
-})
+router.get('/users', UserController.index)
+router.post('/users', UserController.store)
+router.put('/users/:id', UserController.update)
+router.delete('/users/:id', UserController.delete)
 
 export default router
