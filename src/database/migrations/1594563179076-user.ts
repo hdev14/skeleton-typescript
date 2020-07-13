@@ -20,6 +20,7 @@ export class user1594563179076 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
+            isUnique: true,
             isNullable: false
           },
           {
