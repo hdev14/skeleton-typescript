@@ -8,25 +8,22 @@ export class user1594563179076 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid', // only for postgres
             isPrimary: true,
             generationStrategy: 'uuid'
           },
           {
             name: 'name',
-            type: 'varchar',
-            isNullable: false
+            type: 'varchar'
           },
           {
             name: 'email',
             type: 'varchar',
-            isUnique: true,
-            isNullable: false
+            isUnique: true
           },
           {
             name: 'password',
-            type: 'varchar',
-            isNullable: false
+            type: 'varchar'
           },
           {
             name: 'created_at',
