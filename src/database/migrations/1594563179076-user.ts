@@ -10,7 +10,8 @@ export class user1594563179076 implements MigrationInterface {
             name: 'id',
             type: 'uuid', // only for postgres
             isPrimary: true,
-            generationStrategy: 'uuid'
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()'
           },
           {
             name: 'name',
