@@ -2,7 +2,7 @@ import { object, string } from 'yup'
 import { Request, Response, NextFunction } from 'express'
 
 class UserValidator {
-  async create (req: Request, res: Response, next: NextFunction) {
+  public async create (req: Request, res: Response, next: NextFunction) {
     try {
       const schema = object().shape({
         name: string().required(),
@@ -19,7 +19,7 @@ class UserValidator {
     }
   }
 
-  async update (req: Request, res: Response, next: NextFunction) {
+  public async update (req: Request, res: Response, next: NextFunction) {
     try {
       const schema = object().shape({
         name: string().notRequired(),

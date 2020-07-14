@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import AddressController from '../controllers/AddressController'
 
 class AddressValidator {
-  async create (req: Request, res: Response, next: NextFunction) {
+  public async create (req: Request, res: Response, next: NextFunction) {
     try {
       const schema = object().shape({
         street: string().required(),
@@ -23,7 +23,7 @@ class AddressValidator {
     }
   }
 
-  async update (req: Request, res: Response, next: NextFunction) {
+  public async update (req: Request, res: Response, next: NextFunction) {
     try {
       const schema = object().shape({
         street: string().notRequired(),
