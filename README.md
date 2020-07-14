@@ -19,5 +19,5 @@
 - [X] Postgres
 - [ ] Jest (Automated tests)
 - [ ] Docker (Dockerfile and Docker-Compose)
-- [ ] Data Validation (with YupJs)
+- [X] Data Validation (with YupJs)
 
