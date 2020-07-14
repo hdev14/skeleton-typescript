@@ -8,18 +8,22 @@ class UserController {
     return res.json(users)
   }
 
-  async store (req: Request, res: Response) {
+  async create (req: Request, res: Response) {
+    const { name, email, password } = req.body
     const user = new User()
-    user.name = 'user'
-    user.email = 'user@email.com'
-    user.password = '123456'
+    user.name = name
+    user.email = email
+    user.password = password
     await user.save()
     return res.status(201).json(user)
   }
 
   async update (req: Request, res: Response) {
     const { id } = req.params
-    const user = await User.findOneOrFail(id)
+    const user = await User.findOne(id)
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
     const { name, email } = req.body
     user.name = name
     user.email = email
@@ -29,7 +33,10 @@ class UserController {
 
   async delete (req: Request, res: Response) {
     const { id } = req.params
-    const user = await User.findOneOrFail(id)
+    const user = await User.findOne(id)
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
     await user.remove()
     return res.status(204).json()
   }

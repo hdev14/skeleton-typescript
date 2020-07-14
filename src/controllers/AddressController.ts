@@ -4,22 +4,12 @@ import Address from '../entities/Address'
 class AddressController {
   async index (req: Request, res: Response) {
     const { user_id } = req.params
-    if (!user_id) {
-      return res.status(400).json({
-        error: 'User id is required'
-      })
-    }
     const addresses = await Address.find({ user_id })
     return res.json(addresses)
   }
 
-  async store (req: Request, res: Response) {
+  async create (req: Request, res: Response) {
     const { user_id } = req.params
-    if (!user_id) {
-      return res.status(400).json({
-        error: 'User id is required'
-      })
-    }
     const { street, neighborhood, address_number, city, state, complement } = req.body
     const address = new Address()
     address.user_id = user_id
@@ -36,7 +26,10 @@ class AddressController {
 
   async update (req: Request, res: Response) {
     const { id } = req.params
-    const address = await Address.findOneOrFail(id)
+    const address = await Address.findOne(id)
+    if (!address) {
+      return res.status(404).json({ error: 'Address not found' })
+    }
     const { street, neighborhood, address_number, city, state, complement } = req.body
     address.street = street
     address.neighborhood = neighborhood
@@ -51,7 +44,10 @@ class AddressController {
 
   async delete (req: Request, res: Response) {
     const { id } = req.params
-    const address = await Address.findOneOrFail(id)
+    const address = await Address.findOne(id)
+    if (!address) {
+      return res.status(404).json({ error: 'Address not found' })
+    }
     address.remove()
     return res.status(204).json()
   }
