@@ -20,9 +20,8 @@ class UserController {
     }
 
     const user = repository.create(req.body)
-    const { id, name, email } = Object(await repository.save(user))
-
-    return res.status(201).json({ id, name, email })
+    const createdUser = await repository.save(user)
+    return res.status(201).json(createdUser)
   }
 
   public async update (req: Request, res: Response) {

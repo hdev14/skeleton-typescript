@@ -5,7 +5,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  BeforeInsert
+  BeforeInsert,
+  AfterLoad,
+  AfterInsert
 } from 'typeorm'
 
 @Entity('users')
@@ -27,6 +29,12 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date
+
+  @AfterLoad()
+  @AfterInsert()
+  hiddenPassword () {
+    delete this.password
+  }
 
   @BeforeInsert()
   async hashPassword () {
