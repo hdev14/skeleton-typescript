@@ -7,7 +7,9 @@ import notfoundError from '../helpers/notfound-error'
 
 class UserController {
   public async index (req: Request, res: Response) {
-    const users = await getRepository(User).find()
+    const users = await getRepository(User).find({
+      select: ['id', 'name', 'email']
+    })
     return res.json(users)
   }
 

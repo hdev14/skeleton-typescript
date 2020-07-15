@@ -12,6 +12,7 @@ import UserValidator from './validators/UserValidator'
 import AddressValidator from './validators/AddressValidator'
 
 // Controllers
+import SessionController from './controllers/SessionController'
 import UserController from './controllers/UserController'
 import AddressController from './controllers/AddressController'
 
@@ -23,6 +24,9 @@ createConnection().then(connection => {
   app.use(express.json())
   app.use(cors())
   app.use(time)
+
+  const sessionController = new SessionController()
+  app.post('/sessions', sessionController.create)
 
   const userController = new UserController()
   app.get('/users', userController.index)

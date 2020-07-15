@@ -30,7 +30,6 @@ class User {
   @UpdateDateColumn()
   updated_at: Date
 
-  @AfterLoad()
   @AfterInsert()
   hiddenPassword () {
     delete this.password
