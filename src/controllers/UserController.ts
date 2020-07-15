@@ -13,9 +13,16 @@ class UserController {
 
   public async create (req: Request, res: Response) {
     const repository = getRepository(User)
+
+    const userExists = await repository.findOne({ where: { email: req.body.email } })
+    if (userExists) {
+      return res.status(400).json({ error: 'Email already exists' })
+    }
+
     const user = repository.create(req.body)
-    const createdUser = await repository.save(user)
-    return res.status(201).json(createdUser)
+    const { id, name, email } = Object(await repository.save(user))
+
+    return res.status(201).json({ id, name, email })
   }
 
   public async update (req: Request, res: Response) {

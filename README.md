@@ -12,7 +12,7 @@
 > ### In progress yet :construction: :construction_worker:
 
 ## Main Technologies and Resources
-- [X] MVC
+- [X] API REST
 - [X] Typescript
 - [X] Expressjs (cors and json response)
 - [X] Typeorm
