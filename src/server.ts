@@ -32,16 +32,8 @@ createConnection().then(connection => {
 
   const addressController = new AddressController()
   app.get('/users/:user_id/addresses', addressController.index)
-  app.post(
-    '/users/:user_id/addresses',
-    AddressValidator.create,
-    addressController.create
-  )
-  app.put(
-    '/users/addresses/:id',
-    AddressValidator.update,
-    addressController.update
-  )
+  app.post('/users/:user_id/addresses', AddressValidator.create, addressController.create)
+  app.put('/users/addresses/:id', AddressValidator.update, addressController.update)
   app.delete('/users/addresses/:id', addressController.delete)
 
   const port = process.env.APP_PORT || 3333
