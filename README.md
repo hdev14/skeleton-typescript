@@ -20,4 +20,5 @@
 - [ ] Jest (Automated tests)
 - [ ] Docker (Dockerfile and Docker-Compose)
 - [X] Data Validation (with YupJs)
+- [ ] Authentication (JWT)
 
