@@ -1,45 +1,51 @@
+import { Repository, getRepository } from 'typeorm'
 import { Request, Response } from 'express'
 
-import User from '../entities/User'
+import User from '../models/User'
 
 class UserController {
   async index (req: Request, res: Response) {
-    const users = await User.find()
+    const users = await getRepository(User).find()
     return res.json(users)
   }
 
   async create (req: Request, res: Response) {
-    const { name, email, password } = req.body
-    const user = new User()
-    user.name = name
-    user.email = email
-    user.password = password
-    await user.save()
-    return res.status(201).json(user)
+    const repository = getRepository(User)
+    const user = repository.create(req.body)
+    const createdUser = await repository.save(user)
+    return res.status(201).json(createdUser)
   }
 
   async update (req: Request, res: Response) {
-    const { id } = req.params
-    const user = await User.findOne(id)
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' })
+    try {
+      const repository = getRepository(User)
+      const user = await repository.findOneOrFail(req.params.id)
+      repository.merge(user, req.body)
+      const updatedUser = await repository.save(user)
+      return res.json(updatedUser)
+    } catch (err) {
+      if (err.name === 'EntityNotFound') {
+        return res.status(400).json({ error: err.message })
+      } else {
+        return res.status(500).json({ error: 'Something wrong' })
+      }
     }
-    const { name, email } = req.body
-    user.name = name
-    user.email = email
-    await user.save()
-    return res.json(user)
   }
 
   async delete (req: Request, res: Response) {
-    const { id } = req.params
-    const user = await User.findOne(id)
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' })
+    try {
+      const repository = getRepository(User)
+      const user = await repository.findOneOrFail(req.params.id)
+      await repository.delete(user.id)
+      return res.status(204).json()
+    } catch (err) {
+      if (err.name === 'EntityNotFound') {
+        return res.status(400).json({ error: err.message })
+      } else {
+        return res.status(500).json({ error: 'Something wrong' })
+      }
     }
-    await user.remove()
-    return res.status(204).json()
   }
 }
 
-export default new UserController()
+export default UserController
