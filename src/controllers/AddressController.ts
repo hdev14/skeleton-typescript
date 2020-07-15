@@ -3,13 +3,15 @@ import { Request, Response } from 'express'
 
 import Address from '../models/Address'
 
+import notfoundError from '../helpers/notfound-error'
+
 class AddressController {
-  async index (req: Request, res: Response) {
+  public async index (req: Request, res: Response) {
     const addresses = await getRepository(Address).find()
     return res.json(addresses)
   }
 
-  async create (req: Request, res: Response) {
+  public async create (req: Request, res: Response) {
     const { user_id } = req.params
     const repository = getRepository(Address)
     const address = repository.create({ ...req.body, user_id })
@@ -17,7 +19,7 @@ class AddressController {
     return res.status(201).json(createdAddress)
   }
 
-  async update (req: Request, res: Response) {
+  public async update (req: Request, res: Response) {
     try {
       const repository = getRepository(Address)
       const address = await repository.findOneOrFail(req.params.id)
@@ -25,11 +27,7 @@ class AddressController {
       const updatedAddress = await repository.save(address)
       return res.json({ updatedAddress })
     } catch (err) {
-      if (err.name === 'EntityNotFound') {
-        return res.status(400).json({ error: err.message })
-      } else {
-        return res.status(500).json({ error: 'Something wrong' })
-      }
+      return notfoundError(err, res)
     }
   }
 
@@ -40,11 +38,7 @@ class AddressController {
       await repository.delete(address.id)
       return res.status(204).json()
     } catch (err) {
-      if (err.name === 'EntityNotFound') {
-        return res.status(400).json({ error: err.message })
-      } else {
-        return res.status(500).json({ error: 'Something wrong' })
-      }
+      return notfoundError(err, res)
     }
   }
 }
