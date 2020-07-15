@@ -26,23 +26,23 @@ createConnection().then(connection => {
 
   const userController = new UserController()
   app.get('/users', userController.index)
-
   app.post('/users', UserValidator.create, userController.create)
   app.put('/users/:id', UserValidator.update, userController.update)
   app.delete('/users/:id', userController.delete)
 
-  // app.get('/users/:user_id/addresses', AddressController.index)
-  // app.post(
-  //   '/users/:user_id/addresses',
-  //   AddressValidator.create,
-  //   AddressController.create
-  // )
-  // app.put(
-  //   '/users/addresses/:id',
-  //   AddressValidator.update,
-  //   AddressController.update
-  // )
-  // app.delete('/users/addresses/:id', AddressController.delete)
+  const addressController = new AddressController()
+  app.get('/users/:user_id/addresses', addressController.index)
+  app.post(
+    '/users/:user_id/addresses',
+    AddressValidator.create,
+    addressController.create
+  )
+  app.put(
+    '/users/addresses/:id',
+    AddressValidator.update,
+    addressController.update
+  )
+  app.delete('/users/addresses/:id', addressController.delete)
 
   const port = process.env.APP_PORT || 3333
   app.listen(port, () => {
