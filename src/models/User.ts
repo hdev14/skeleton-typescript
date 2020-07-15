@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Entity,
   Column,
   PrimaryGeneratedColumn,
@@ -8,7 +7,7 @@ import {
 } from 'typeorm'
 
 @Entity('users')
-class User extends BaseEntity {
+class User {
   @PrimaryGeneratedColumn('uuid')
   id: string
 

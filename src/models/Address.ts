@@ -5,13 +5,12 @@ import {
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity
+  UpdateDateColumn
 } from 'typeorm'
 import User from './User'
 
 @Entity('addresses')
-class Address extends BaseEntity {
+class Address {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
