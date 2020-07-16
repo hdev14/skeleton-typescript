@@ -16,7 +16,7 @@
 - [X] Typescript
 - [X] Expressjs (cors and json response)
 - [X] Typeorm
-- [X] Postgres
+- [X] Files Upload
 - [ ] Jest (Automated tests)
 - [ ] Docker (Dockerfile and Docker-Compose)
 - [X] Data Validation (with YupJs)
