@@ -1,5 +1,7 @@
 import { getRepository } from 'typeorm'
 import { Request, Response } from 'express'
+import path from 'path'
+import fs from 'fs'
 
 import User from '../models/User'
 
@@ -40,10 +42,20 @@ class UserController {
 
   public async updatePhoto (req: Request, res: Response) {
     try {
-      const { filename: photo } = req.file
+      const { filename } = req.file
       const repository = getRepository(User)
       const user = await repository.findOneOrFail(req.userId)
-      await repository.merge(user, { photo })
+
+      if (user.photo) {
+        const tmpPath = path.resolve(__dirname, '..', '..', 'tmp')
+        const filePath = path.join(tmpPath, user.photo)
+
+        const file = await fs.promises.stat(filePath)
+        if (file.isFile()) {
+          await fs.promises.unlink(filePath)
+        }
+      }
+      user.photo = filename
       const updatedUser = await repository.save(user)
       return res.json(updatedUser)
     } catch (err) {
