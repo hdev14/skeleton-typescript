@@ -6,8 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
-  AfterLoad,
-  AfterInsert
+  AfterInsert,
+  AfterUpdate
 } from 'typeorm'
 
 @Entity('users')
@@ -24,6 +24,9 @@ class User {
   @Column()
   password: string
 
+  @Column({ type: 'varchar', nullable: true })
+  photo: string
+
   @CreateDateColumn()
   created_at: Date
 
@@ -31,6 +34,7 @@ class User {
   updated_at: Date
 
   @AfterInsert()
+  @AfterUpdate()
   hiddenPassword () {
     delete this.password
   }

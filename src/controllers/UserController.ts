@@ -39,7 +39,16 @@ class UserController {
   }
 
   public async updatePhoto (req: Request, res: Response) {
-    return res.json()
+    try {
+      const { filename: photo } = req.file
+      const repository = getRepository(User)
+      const user = await repository.findOneOrFail(req.userId)
+      await repository.merge(user, { photo })
+      const updatedUser = await repository.save(user)
+      return res.json(updatedUser)
+    } catch (err) {
+      return notfoundError(err, res)
+    }
   }
 
   public async delete (req: Request, res: Response) {
