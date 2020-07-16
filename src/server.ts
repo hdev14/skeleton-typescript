@@ -42,9 +42,7 @@ createConnection().then(connection => {
   app.delete('/users/:id', userController.delete)
 
   const upload = multer({ storage: multerStorageConfig })
-  app.patch('/users/photo', upload.single('photo'), (req, res) => {
-    return res.json()
-  })
+  app.patch('/users/photo', upload.single('photo'), userController.updatePhoto)
 
   app.get('/users/:user_id/addresses', addressController.index)
   app.post('/users/:user_id/addresses', AddressValidator.create, addressController.create)

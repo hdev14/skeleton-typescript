@@ -38,6 +38,10 @@ class UserController {
     }
   }
 
+  public async updatePhoto (req: Request, res: Response) {
+    return res.json()
+  }
+
   public async delete (req: Request, res: Response) {
     try {
       const repository = getRepository(User)
