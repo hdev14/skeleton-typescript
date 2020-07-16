@@ -2,10 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import { createConnection } from 'typeorm'
 
-import User from './models/User'
-
-// Middleware
+// Middlewares
 import time from './middlewares/time'
+import auth from './middlewares/auth'
 
 // Validators
 import SessionValidator from './validators/SessionValidator'
@@ -27,15 +26,18 @@ createConnection().then(connection => {
   app.use(time)
 
   const sessionController = new SessionController()
-  app.post('/sessions', SessionValidator.create, sessionController.create)
-
   const userController = new UserController()
-  app.get('/users', userController.index)
+  const addressController = new AddressController()
+
+  app.post('/sessions', SessionValidator.create, sessionController.create)
   app.post('/users', UserValidator.create, userController.create)
+
+  app.use(auth)
+
+  app.get('/users', userController.index)
   app.put('/users/:id', UserValidator.update, userController.update)
   app.delete('/users/:id', userController.delete)
 
-  const addressController = new AddressController()
   app.get('/users/:user_id/addresses', addressController.index)
   app.post('/users/:user_id/addresses', AddressValidator.create, addressController.create)
   app.put('/users/addresses/:id', AddressValidator.update, addressController.update)
@@ -46,5 +48,5 @@ createConnection().then(connection => {
     console.log(`Server is running! -> http://localhost:${port}`)
   })
 }).catch(err => {
-  console.log('CONNECTION ERROR', err)
+  console.log('CONNECTION ERROR -> ', err)
 })
