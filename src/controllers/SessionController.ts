@@ -14,7 +14,8 @@ class SessionController {
     })
 
     if (user && (await compare(password, user.password))) {
-      const token = sign({ id: user.id }, '51a1a2d76edbf9f0c3141d8e4c9321bb', { expiresIn: '1d' })
+      const secret = process.env.APP_KEY || 'supersecret'
+      const token = sign({ id: user.id }, secret, { expiresIn: '1d' })
       delete user.password
       return res.status(201).json({ user, token })
     }
