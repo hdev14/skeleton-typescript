@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { createConnection } from 'typeorm'
+import multer from 'multer'
 
 // Middlewares
 import time from './middlewares/time'
@@ -15,6 +16,8 @@ import AddressValidator from './validators/AddressValidator'
 import SessionController from './controllers/SessionController'
 import UserController from './controllers/UserController'
 import AddressController from './controllers/AddressController'
+
+import multerStorageConfig from './configs/multer-storage'
 
 require('dotenv').config()
 
@@ -37,6 +40,11 @@ createConnection().then(connection => {
   app.get('/users', userController.index)
   app.put('/users/:id', UserValidator.update, userController.update)
   app.delete('/users/:id', userController.delete)
+
+  const upload = multer({ storage: multerStorageConfig })
+  app.patch('/users/photo', upload.single('photo'), (req, res) => {
+    return res.json()
+  })
 
   app.get('/users/:user_id/addresses', addressController.index)
   app.post('/users/:user_id/addresses', AddressValidator.create, addressController.create)
