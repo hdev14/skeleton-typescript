@@ -19,6 +19,7 @@
 - [X] Files Upload
 - [ ] Jest (Automated tests)
 - [ ] Docker (Dockerfile and Docker-Compose)
-- [X] Data Validation (with YupJs)
+- [X] Data Validation
 - [ ] Authentication (JWT)
+- [X] ESlint
 
