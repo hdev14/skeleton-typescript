@@ -1,7 +1,11 @@
 import { verify, JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken'
 import { Request, Response, NextFunction, json } from 'express'
 
-export default function auth (req: Request, res: Response, next: NextFunction) {
+export interface RequestWithUserId extends Request {
+  userId?: string
+}
+
+export default function auth (req: RequestWithUserId, res: Response, next: NextFunction) {
   const token = req.headers.authorization?.split(' ')[1]
 
   try {

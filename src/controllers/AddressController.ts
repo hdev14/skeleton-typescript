@@ -7,7 +7,7 @@ import notfoundError from '../helpers/notfound-error'
 
 class AddressController {
   public async index (req: Request, res: Response) {
-    const addresses = await getRepository(Address).find()
+    const addresses = await getRepository(Address).find({ where: { user_id: req.params.user_id } })
     return res.json(addresses)
   }
 
