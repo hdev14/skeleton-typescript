@@ -8,6 +8,7 @@ import User from './models/User'
 import time from './middlewares/time'
 
 // Validators
+import SessionValidator from './validators/SessionValidator'
 import UserValidator from './validators/UserValidator'
 import AddressValidator from './validators/AddressValidator'
 
@@ -26,7 +27,7 @@ createConnection().then(connection => {
   app.use(time)
 
   const sessionController = new SessionController()
-  app.post('/sessions', sessionController.create)
+  app.post('/sessions', SessionValidator.create, sessionController.create)
 
   const userController = new UserController()
   app.get('/users', userController.index)
