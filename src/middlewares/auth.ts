@@ -1,16 +1,21 @@
 import { verify, JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken'
 import { Request, Response, NextFunction, json } from 'express'
 
-export interface RequestWithUserId extends Request {
-  userId?: string
+import authConfig from '../configs/auth'
+
+interface Payload {
+  id: string,
+  iat: number,
+  exp: number
 }
 
-export default function auth (req: RequestWithUserId, res: Response, next: NextFunction) {
+export default function auth (req: Request, res: Response, next: NextFunction) {
   const token = req.headers.authorization?.split(' ')[1]
 
   try {
     if (token) {
-      const decoded = verify(token, process.env.APP_KEY)
+      const decoded = verify(token, authConfig.secret) as Payload
+      console.log(decoded)
       req.userId = decoded.id
       return next()
     }

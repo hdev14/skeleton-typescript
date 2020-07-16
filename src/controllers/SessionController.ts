@@ -3,7 +3,9 @@ import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
+import authConfig from '../configs/auth'
 import User from '../models/User'
+import auth from '../middlewares/auth'
 
 class SessionController {
   async create (req: Request, res: Response) {
@@ -14,8 +16,7 @@ class SessionController {
     })
 
     if (user && (await compare(password, user.password))) {
-      const secret = process.env.APP_KEY || 'supersecret'
-      const token = sign({ id: user.id }, secret, { expiresIn: '1d' })
+      const token = sign({ id: user.id }, authConfig.secret, { expiresIn: authConfig.exp })
       delete user.password
       return res.status(201).json({ user, token })
     }
