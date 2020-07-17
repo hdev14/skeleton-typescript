@@ -7,8 +7,8 @@
     "build": "tsc",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules ./src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "test": "jest --watchAll ",
-    "test:staged": "jest --bail --passWithNoTests"
+    "test": "jest --watch --colors",
+    "test:staged": "jest --bail --passWithNoTests --findRelatedTests --silent --colors --noStackTrace"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
