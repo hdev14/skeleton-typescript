@@ -1,8 +1,8 @@
 import express from 'express'
 import 'express-async-errors'
-import cors from 'cors';
-import { createConnection } from 'typeorm';
-import multer from 'multer';
+import cors from 'cors'
+import { createConnection } from 'typeorm'
+import multer from 'multer'
 
 // Middlewares
 import time from './middlewares/time'
