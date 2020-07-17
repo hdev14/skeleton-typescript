@@ -6,4 +6,7 @@ dist
 tmp/*
 !tmp/.gitkeep
 
+__test__/*
+!__test__/.gitkeep
+
 yarn-error.log
