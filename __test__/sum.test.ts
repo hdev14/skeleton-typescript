@@ -1,7 +1,7 @@
 function sum () {
-  return 1 + 2
+  return 1 + 4
 }
 
 test('sum', () => {
-  expect(sum()).toBe(4)
+  expect(sum()).toBe(5)
 })
