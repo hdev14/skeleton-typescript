@@ -8,7 +8,7 @@ import RequestError from '../errors/RequestError'
 import User from '../models/User'
 
 class SessionController {
-  async create (req: Request, res: Response) {
+  public async create (req: Request, res: Response) {
     const { email, password } = req.body
     const user = await getRepository(User).findOne({
       select: ['id', 'name', 'email', 'password'],

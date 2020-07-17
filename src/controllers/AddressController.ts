@@ -31,7 +31,7 @@ class AddressController {
     }
   }
 
-  async delete (req: Request, res: Response) {
+  public async delete (req: Request, res: Response) {
     try {
       const repository = getRepository(Address)
       const address = await repository.findOneOrFail(req.params.id)
