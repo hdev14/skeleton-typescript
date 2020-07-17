@@ -3,5 +3,5 @@ function sum () {
 }
 
 test('sum', () => {
-  expect(sum()).toBe(3)
+  expect(sum()).toBe(4)
 })
