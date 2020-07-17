@@ -1,17 +1,17 @@
-export interface ErrorInterface extends Error {
+export interface RequestErrorInterface extends Error {
   statusCode?: number
 }
 
-class ResponseError implements ErrorInterface {
+class RequestError implements RequestErrorInterface {
   public readonly name: string
   public readonly message: string
   public readonly statusCode: number
 
-  constructor (message: string, name = 'ResponseError', statusCode = 400) {
+  constructor (message: string, name = 'RequestError', statusCode = 400) {
     this.message = message
     this.name = name
     this.statusCode = statusCode
   }
 }
 
-export default ResponseError
+export default RequestError

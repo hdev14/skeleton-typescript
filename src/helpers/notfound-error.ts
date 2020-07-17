@@ -1,4 +1,4 @@
-import ResponseError from '../errors/ResponseError'
+import ResponseError from '../errors/RequestError'
 
 export default function notfoundError (error: Error): void {
   if (error.name === 'EntityNotFound') {

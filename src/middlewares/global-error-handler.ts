@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
-import { ErrorInterface } from '../errors/ResponseError'
+import { RequestErrorInterface } from '../errors/RequestError'
 
-function globalErrorHandler (err: ErrorInterface, req: Request, res: Response, next: NextFunction) {
+function globalErrorHandler (err: RequestErrorInterface, req: Request, res: Response, next: NextFunction) {
   if (err.statusCode) {
     return res.status(err.statusCode).json({
       error: err.name,

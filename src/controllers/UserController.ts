@@ -3,8 +3,6 @@ import { Request, Response } from 'express'
 import path from 'path'
 import fs from 'fs'
 
-import ResponseError from '../errors/ResponseError'
-
 import User from '../models/User'
 
 import notfoundError from '../helpers/notfound-error'

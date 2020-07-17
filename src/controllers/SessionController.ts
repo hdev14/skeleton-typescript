@@ -4,7 +4,7 @@ import { sign } from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
 import authConfig from '../configs/auth'
-import ResponseError from '../errors/ResponseError'
+import RequestError from '../errors/RequestError'
 import User from '../models/User'
 
 class SessionController {
@@ -21,7 +21,7 @@ class SessionController {
       return res.status(201).json({ user, token })
     }
 
-    throw new ResponseError('Email or passowrd incorrect', 'Validations Fails')
+    throw new RequestError('Email or passowrd incorrect', 'Validations Fails')
   }
 }
 
