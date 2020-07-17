@@ -1,4 +1,5 @@
 import express from 'express'
+import 'express-async-errors'
 import cors from 'cors'
 import { createConnection } from 'typeorm'
 import multer from 'multer'
@@ -6,6 +7,7 @@ import multer from 'multer'
 // Middlewares
 import time from './middlewares/time'
 import auth from './middlewares/auth'
+import globalErrorHandler from './middlewares/global-error-handler'
 
 // Validators
 import SessionValidator from './validators/SessionValidator'
@@ -48,6 +50,9 @@ createConnection().then(connection => {
   app.post('/users/:user_id/addresses', AddressValidator.create, addressController.create)
   app.put('/users/addresses/:id', AddressValidator.update, addressController.update)
   app.delete('/users/addresses/:id', addressController.delete)
+
+  // Global Error Handling
+  app.use(globalErrorHandler)
 
   const port = process.env.APP_PORT || 3333
   app.listen(port, () => {

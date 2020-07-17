@@ -1,13 +1,9 @@
-import { Response } from 'express'
+import ResponseError from '../errors/ResponseError'
 
-interface ResponseError {
-  error: string
-}
-
-export default function notfoundError (error: Error, res: Response): Response<ResponseError> {
+export default function notfoundError (error: Error): void {
   if (error.name === 'EntityNotFound') {
-    return res.status(400).json({ error: error.message })
+    throw new ResponseError(error.message, error.name, 404)
   }
 
-  return res.status(500).json({ error: 'Something wrong' })
+  throw error
 }

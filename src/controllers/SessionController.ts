@@ -4,8 +4,8 @@ import { sign } from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
 import authConfig from '../configs/auth'
+import ResponseError from '../errors/ResponseError'
 import User from '../models/User'
-import auth from '../middlewares/auth'
 
 class SessionController {
   async create (req: Request, res: Response) {
@@ -21,7 +21,7 @@ class SessionController {
       return res.status(201).json({ user, token })
     }
 
-    return res.status(400).json({ error: 'Email or passowrd incorrect' })
+    throw new ResponseError('Email or passowrd incorrect', 'Validations Fails')
   }
 }
 

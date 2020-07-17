@@ -3,6 +3,8 @@ import { Request, Response } from 'express'
 import path from 'path'
 import fs from 'fs'
 
+import ResponseError from '../errors/ResponseError'
+
 import User from '../models/User'
 
 import notfoundError from '../helpers/notfound-error'
@@ -36,7 +38,7 @@ class UserController {
       const updatedUser = await repository.save(user)
       return res.json(updatedUser)
     } catch (err) {
-      return notfoundError(err, res)
+      return notfoundError(err)
     }
   }
 
@@ -59,7 +61,7 @@ class UserController {
       const updatedUser = await repository.save(user)
       return res.json(updatedUser)
     } catch (err) {
-      return notfoundError(err, res)
+      return notfoundError(err)
     }
   }
 
@@ -70,7 +72,7 @@ class UserController {
       await repository.delete(user.id)
       return res.status(204).json()
     } catch (err) {
-      return notfoundError(err, res)
+      return notfoundError(err)
     }
   }
 }

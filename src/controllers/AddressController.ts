@@ -27,7 +27,7 @@ class AddressController {
       const updatedAddress = await repository.save(address)
       return res.json({ updatedAddress })
     } catch (err) {
-      return notfoundError(err, res)
+      return notfoundError(err)
     }
   }
 
@@ -38,7 +38,7 @@ class AddressController {
       await repository.delete(address.id)
       return res.status(204).json()
     } catch (err) {
-      return notfoundError(err, res)
+      return notfoundError(err)
     }
   }
 }
