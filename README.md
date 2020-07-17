@@ -22,4 +22,5 @@
 - [X] Data Validation
 - [ ] Authentication (JWT)
 - [X] ESlint
+- [ ] Pre-commit lint (Enforce code style and Tests)
 
