@@ -15,7 +15,6 @@ export default function auth (req: Request, res: Response, next: NextFunction) {
   try {
     if (token) {
       const decoded = verify(token, authConfig.secret) as Payload
-      console.log(decoded)
       req.userId = decoded.id
       return next()
     }

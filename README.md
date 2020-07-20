@@ -17,10 +17,9 @@
 - [X] Expressjs (cors and json response)
 - [X] Typeorm
 - [X] Files Upload
-- [X] Jest (Automated tests)
 - [ ] Docker (Dockerfile and Docker-Compose)
 - [X] Data Validation
 - [X] Authentication (JWT)
 - [X] ESlint
-- [X] Git pre-commit and pre-push lint (Enforce code style and Tests)
+- [X] Git pre-commit lint (Enforce code style)
 

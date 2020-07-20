@@ -1,6 +1,6 @@
 import express from 'express'
 import 'express-async-errors'
-import { createConnection, getConnectionOptions } from 'typeorm'
+import { createConnection } from 'typeorm'
 
 import App from './App'
 
