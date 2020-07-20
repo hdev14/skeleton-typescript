@@ -2,11 +2,13 @@ node_modules
 dist
 .vscode
 .env
+.ormconfig.json
 
 tmp/*
 !tmp/.gitkeep
 
-__test__/coverage
-!__test__/.gitkeep
+__tests__/coverage
+__tests__/database.sqlite
+!__tests__/.gitkeep
 
 yarn-error.log

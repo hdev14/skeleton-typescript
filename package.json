@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev --inspect --transpile-only ./src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -f=.ormconfig.json",
+    "pretest": "ts-node-dev ./node_modules/typeorm/cli.js -f=.ormconfig.json --connection=test migration:run",
     "test": "jest --watch --colors",
     "test:staged": "jest --passWithNoTests --findRelatedTests --silent --colors --noStackTrace",
     "test:ci": "jest --coverage --silent --noStackTrace"
