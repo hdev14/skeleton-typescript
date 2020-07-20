@@ -7,11 +7,21 @@
     "build": "tsc",
     "dev": "ts-node-dev --inspect --transpile-only ./src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -f=.ormconfig.json",
-    "pretest": "ts-node-dev ./node_modules/typeorm/cli.js -f=.ormconfig.json --connection=test migration:run",
-    "posttest": "ts-node-dev ./node_modules/typeorm/cli.js -f=.ormconfig.json --connection=test schema:drop",
+
     "test": "jest --watch --colors",
     "test:staged": "jest --passWithNoTests --findRelatedTests --silent --colors --noStackTrace",
-    "test:ci": "jest --coverage --silent --noStackTrace"
+    "test:ci": "jest --coverage --silent --noStackTrace",
+
+    "run:migrations": "yarn typeorm --connection=test migration:run",
+    "drop:migrations": "yarn typeorm --connection=test schema:drop",
+
+    "pretest": "yarn run:migrations",
+    "pretest:staged": "yarn run:migrations",
+    "pretest:ci": "yarn run:migrations",
+
+    "posttest": "yarn drop:migrations",
+    "posttest:ci": "yarn drop:migrations",
+    "posttest:staged": "yarn drop:migrations"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
