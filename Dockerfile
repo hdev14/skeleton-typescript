@@ -1,6 +1,6 @@
-FROM node:12.19.0
+FROM node:12.19.0-alpine3.12
 
-WORKDIR /home/project/api
+WORKDIR /home/node/api
 
 COPY package*.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 4444
 
-ENTRYPOINT ["npm", "run dev"]
+ENTRYPOINT [ "npm", "dev" ]
