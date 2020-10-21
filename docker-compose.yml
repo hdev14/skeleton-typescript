@@ -1,5 +1,14 @@
 version: "3.8"
 services:
+  api:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "4444:4444"
+    volumes:
+      - ".:/home/project/api/"
+    command: ["./wait-for-postgres.sh", "localhost:5432", "npm", "run", "dev"]
   db:
     image: postgres
     volumes:
@@ -13,13 +22,5 @@ services:
       POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: db123
       POSTGRES_DB: skeleton
-  api:
-    build: .
-    depends_on:
-      - db
-    ports:
-      - "4444:4444"
-    volumes:
-      - ".:/home/project/api/"
 volumes:
   dbdata:
